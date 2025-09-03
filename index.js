@@ -60,6 +60,10 @@ app.listen(3000, () => {
     console.log("APP IS LISTENING ON PRT 3000!");
 })
 
+app.get('/', (req, res) => {
+  res.redirect('/workouts');
+});
+
 app.get('/workouts', async (req, res) => {
     res.render("workouts/index", { days });
 })
