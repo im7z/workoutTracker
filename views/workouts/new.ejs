@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Workout</title>
+    <link rel="stylesheet" href="/style1.css">
+</head>
+
+<body>
+    <header>
+        <a href="/workouts" class="back-btn">⬅ Go Back</a>
+        <h1>Add a New Workout</h1>
+    </header>
+    <form action="/workouts" method="POST" enctype="multipart/form-data" class="new-form">
+        <!-- Workout Name -->
+        <label for="name">Workout Name</label>
+        <input type="text" name="name" id="name" placeholder="e.g. Bench Press" required>
+
+        <!-- Workout Day -->
+        <label for="day">Workout Day</label>
+        <select name="day" id="day" required>
+            <% for (let d of days) { %>
+                <option value="<%= d %>">
+                    <%= d %>
+                </option>
+                <% } %>
+        </select>
+
+        <!-- Upload Image -->
+        <label for="image">Workout Image</label>
+        <input type="file" name="image" id="image" accept="image/*" required>
+
+        <!-- Weight -->
+        <label for="weight">Weight (kg)</label>
+        <input type="number" name="weight" id="weight" min="0" placeholder="Enter weight" required>
+
+        <!-- Reps -->
+        <label for="reps">Reps</label>
+        <input type="number" name="reps" id="reps" min="0" placeholder="Enter reps" required>
+
+        <!-- Submit -->
+        <button type="submit" class="add-btn"> Add Workout</button>
+    </form>
+
+
+</body>
+
+</html>

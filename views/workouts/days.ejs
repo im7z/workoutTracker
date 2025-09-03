@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style1.css">
+    <title>
+        <%= day %>
+    </title>
+</head>
+
+<body>
+
+    <header>
+        <!-- Back button at the top -->
+        <a href="/workouts" class="back-btn">⬅ Back</a>
+        <h1>
+            <%= day %> Workouts
+        </h1>
+    </header>
+    <% for (let workout of workouts) { %>
+        <div class="workout-card">
+            <img src="<%= workout.image %>" alt="<%= workout.name %>">
+            <h2><a href="/workouts/<%= workout._id %>/show">
+                    <%= workout.name %>
+                </a></h2>
+            <p>Weight: <%= workout.weight %> kg</p>
+            <p>Reps: <%= workout.reps %>
+            </p>
+        </div>
+        <% } %>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkoutTracker</title>
+    <link rel="stylesheet" href="/style1.css">
+</head>
+
+<body>
+    <h1>Workouts Tracker Web App</h1>
+
+    <!-- Day buttons -->
+    <div class="day-buttons">
+        <% for (let day of days) { %>
+            <a href="/workouts/days/<%= day %>" class="day-btn">
+                <%= day %>
+            </a>
+            <% } %>
+    </div>
+
+    
+        <a href="/workouts/new" class="btn add-btn"> Add New Workout</a>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style1.css">
+    <title>Edit <%= workout.name %>
+    </title>
+</head>
+
+<body>
+    <header>
+        <a href="/workouts/days/<%= workout.day %>" class="back-btn">⬅ Back</a>
+        <h1>Edit <%= workout.name %>
+        </h1>
+    </header>
+
+    <!-- Edit form -->
+    <form action="/workouts/<%= workout._id %>?_method=PUT" method="POST" class="edit-form">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" name="weight" id="weight" value="<%= workout.weight %>">
+
+        <label for="reps">Reps:</label>
+        <input type="number" name="reps" id="reps" value="<%= workout.reps %>">
+
+        <button type="submit" class="save-btn"> Save Changes</button>
+    </form>
+
+
+    <!-- Delete button -->
+    <form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
+        <button type="submit" class="delete-btn"> Delete</button>
+    </form>
+</body>
+
+</html>
