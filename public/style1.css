@@ -38,10 +38,15 @@ h1 {
 .workout-card img {
   width: 100%;
   /* image takes full width */
-  height: 200px;
+  height: auto;
+  /* ✅ no fixed height */
+  max-height: 300px;
+  /* optional limit */
   /* fixed height */
-  object-fit: cover;
-  /* crop/zoom image to fit nicely */
+  object-fit: contain;
+  /* ✅ show full image */
+  background: #f9f9f9;
+  /* fill empty space with light gray */
   display: block;
 }
 
