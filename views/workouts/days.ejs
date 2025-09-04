@@ -14,7 +14,7 @@
 
     <header>
         <!-- Back button at the top -->
-        <a href="/workouts" class="back-btn">⬅ Back</a>
+        <a href="/workouts" class="back-btn">Back</a>
         <h1>
             <%= day %> Workouts
         </h1>
@@ -25,8 +25,8 @@
             <h2><a href="/workouts/<%= workout._id %>/show">
                     <%= workout.name %>
                 </a></h2>
-            <p>Weight: <%= workout.weight %> kg</p>
-            <p>Reps: <%= workout.reps %>
+            <p>Weight: <b><%= workout.weight %></b> kg</p>
+            <p>Reps: <b><%= workout.reps %></b>
             </p>
         </div>
         <% } %>
