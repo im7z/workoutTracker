@@ -23,23 +23,38 @@ h1 {
 
 .workout-card {
   border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 15px;
-  margin: 10px 0;
-  /* Space between cards */
-  background-color: #f9f9f9;
-  max-width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  /* ensures image corners match card */
+  margin: 15px 0;
+  background-color: #fff;
   width: 90%;
-  /* shrink on mobile, expand on desktop */
-  /* Fixed width so all are same size */
+  /* responsive */
+  max-width: 300px;
   text-align: center;
-  /* Center text inside */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .workout-card img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 8px;
+  width: 100%;
+  /* image takes full width */
+  height: 200px;
+  /* fixed height */
+  object-fit: cover;
+  /* crop/zoom image to fit nicely */
+  display: block;
+}
+
+.workout-card h2 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+  color: #333;
+}
+
+.workout-card p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
 }
 
 .back-btn {
@@ -168,7 +183,8 @@ select {
 
 
 
-button, .btn {
+button,
+.btn {
   display: inline-block;
   padding: 10px 16px;
   border: none;
@@ -180,17 +196,21 @@ button, .btn {
 }
 
 /* Variants */
-.add-btn, .new-form button {
+.add-btn,
+.new-form button {
   background-color: #28a745;
   margin-top: 20px;
 }
-.add-btn:hover, .new-form button:hover {
+
+.add-btn:hover,
+.new-form button:hover {
   background-color: #218838;
 }
 
 .save-btn {
   background-color: #007bff;
 }
+
 .save-btn:hover {
   background-color: #0056b3;
 }
@@ -198,6 +218,7 @@ button, .btn {
 .delete-btn {
   background-color: #dc3545;
 }
+
 .delete-btn:hover {
   background-color: #c82333;
 }
@@ -205,6 +226,7 @@ button, .btn {
 .back-btn {
   background-color: #6c757d;
 }
+
 .back-btn:hover {
   background-color: #5a6268;
 }

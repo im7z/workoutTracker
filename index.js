@@ -18,12 +18,14 @@ cloudinary.config({
 
 // Configure Multer to use Cloudinary
 const storage = new CloudinaryStorage({
-    cloudinary,
-    params: {
-        folder: 'workoutTracker',    // Folder name in Cloudinary
-        allowed_formats: ['jpg', 'png', 'jpeg']
-    }
+  cloudinary,
+  params: {
+    folder: 'workoutTracker',
+    format: 'jpg', // ✅ convert everything to JPG
+    transformation: [{ quality: 'auto', fetch_format: 'auto' }]
+  }
 });
+
 const upload = multer({ storage });
 
 
