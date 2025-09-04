@@ -5,15 +5,23 @@ const mongoose = require("mongoose");
 const Workouts = require('./models/workouts');
 const methodOverride = require('method-override');
 const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
 
 
-// Set storage location for uploaded images
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, 'public/uploads'));   // save inside /public/uploads
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname); // unique filename
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
+});
+
+
+// Configure Multer to use Cloudinary
+const storage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: 'workoutTracker',    // Folder name in Cloudinary
+        allowed_formats: ['jpg', 'png', 'jpeg']
     }
 });
 const upload = multer({ storage });
@@ -26,14 +34,14 @@ app.use(cookieParser());
 
 // Middleware to assign a userId if not exists
 app.use((req, res, next) => {
-  if (!req.cookies.userId) {
-    const newId = uuid();
-    res.cookie('userId', newId, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 }); 
-    // console.log("New user assigned:", newId);   // ✅ this works
-  } else {
-    // console.log("Returning user:", req.cookies.userId);
-  }
-  next();
+    if (!req.cookies.userId) {
+        const newId = uuid();
+        res.cookie('userId', newId, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 });
+        // console.log("New user assigned:", newId);   // ✅ this works
+    } else {
+        // console.log("Returning user:", req.cookies.userId);
+    }
+    next();
 });
 
 const days = ['Push', 'Pull', 'Legs'];
@@ -75,16 +83,16 @@ app.get('/workouts/new', (req, res) => {
 app.post('/workouts', upload.single('image'), async (req, res) => {
     const { name, day, weight, reps } = req.body;
 
-    // Save image path (relative to /public)
-    const imagePath = '/uploads/' + req.file.filename;
+    // Cloudinary gives you a secure URL
+    const imagePath = req.file.path;  // Cloudinary URL
 
     const newWorkout = new Workouts({
         name,
         day,
-        image: imagePath,  // store local path
+        image: imagePath,   // store the Cloudinary URL
         weight,
         reps,
-        userId: req.cookies.userId 
+        userId: req.cookies.userId
     });
 
     await newWorkout.save();
@@ -93,7 +101,7 @@ app.post('/workouts', upload.single('image'), async (req, res) => {
 
 app.get('/workouts/days/:day', async (req, res) => {
     const { day } = req.params;
-    const workouts = await Workouts.find({ day, userId: req.cookies.userId  });
+    const workouts = await Workouts.find({ day, userId: req.cookies.userId });
     res.render("workouts/days", { workouts, day });
 })
 
