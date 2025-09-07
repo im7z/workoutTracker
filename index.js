@@ -122,7 +122,7 @@ app.get('/workouts/days/:day', async (req, res) => {
 
     const subDays = await Workouts.distinct("subDay", { day, userId: req.cookies.userId });
 
-    es.render("workouts/days", { workouts, day, subDays, currentSubDay: subDay });
+    res.render("workouts/days", { workouts, day, subDays, currentSubDay: subDay });
 })
 
 app.get('/workouts/:id/show', async (req, res) => {
@@ -135,7 +135,7 @@ app.put('/workouts/:id', async (req, res) => {
     const { id } = req.params;
     const workout = await Workouts.findByIdAndUpdate(
         id,
-        { weight: req.body.weight, reps: req.body.reps, subDay: req.body.subDay},
+        { weight: req.body.weight, reps: req.body.reps, subDay: req.body.subDay },
         { runValidators: true, new: true }
     );
     res.redirect(`/workouts/days/${workout.day}`);
