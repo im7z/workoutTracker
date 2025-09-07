@@ -1,11 +1,18 @@
 body {
   display: flex;
   flex-direction: column;
-  /* Stack items vertically */
   align-items: center;
-  /* Center items horizontally */
   font-family: Arial, sans-serif;
-
+  background-color: #121212;
+  justify-content: center;
+  /* ✅ centers vertically */
+  min-height: 100vh;
+  /* ✅ full screen height */
+  /* dark background */
+  color: #e0e0e0;
+  /* light gray text */
+  margin: 0;
+  /* remove default margin */
 }
 
 header {
@@ -15,57 +22,56 @@ header {
   margin-bottom: 20px;
 }
 
-h1 {
+h1,
+h2 {
   text-align: center;
   font-size: 26px;
-  /* Center the title */
+  color: #ffcc00;
+  /* yellow titles */
 }
 
+/* Workout cards */
 .workout-card {
-  border: 1px solid #ccc;
+  border: 1px solid #333;
   border-radius: 10px;
   overflow: hidden;
-  /* ensures image corners match card */
   margin: 15px 0;
-  background-color: #fff;
+  background-color: #1e1e1e;
+  /* dark gray card */
   width: 90%;
-  /* responsive */
   max-width: 300px;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 .workout-card img {
   width: 100%;
-  /* image takes full width */
   height: auto;
-  /* ✅ no fixed height */
   max-height: 300px;
-  /* optional limit */
-  /* fixed height */
   object-fit: contain;
-  /* ✅ show full image */
-  background: #f9f9f9;
-  /* fill empty space with light gray */
+  background: #000;
   display: block;
 }
 
 .workout-card h2 {
   margin: 10px 0 5px;
   font-size: 18px;
-  color: #333;
+  color: #ffcc00;
+  /* yellow */
 }
 
 .workout-card p {
   margin: 5px 0;
   font-size: 16px;
-  color: #555;
+  color: #aaa;
+  /* lighter gray */
 }
 
+/* Back button */
 .back-btn {
   text-decoration: none;
-  background-color: #6c757d;
-  color: white;
+  background-color: #333;
+  color: #ffcc00;
   padding: 8px 14px;
   border-radius: 6px;
   font-size: 14px;
@@ -73,68 +79,70 @@ h1 {
 }
 
 .back-btn:hover {
-  background-color: #5a6268;
+  background-color: #444;
 }
 
+/* Generic button */
 .btn {
   display: inline-block;
   text-decoration: none;
-  background-color: #6c757d;
-  color: white;
+  color: #121212;
+  background-color: #ffcc00;
   padding: 10px 16px;
   border-radius: 6px;
   transition: background 0.2s;
 }
 
 .btn:hover {
-  background-color: #5a6268;
+  background-color: #e6b800;
 }
 
+/* Day buttons list (home page) */
 .day-buttons {
   display: flex;
   flex-direction: column;
-  /* Stack buttons vertically */
   gap: 10px;
-  /* Space between buttons */
   margin-top: 20px;
 }
 
 .day-btn {
   display: inline-block;
   text-decoration: none;
-  /* Remove underline */
-  background-color: #007bff;
-  color: white;
+  background-color: #333;
+  color: #ffcc00;
   padding: 12px 20px;
   border-radius: 8px;
   text-align: center;
   width: 200px;
-  /* Same width for all buttons */
-  transition: background 0.2s;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
 }
 
 .day-btn:hover {
-  background-color: #0056b3;
+  background-color: #ffcc00;
+  color: #121212;
 }
 
-
+/* Forms */
 form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 250px;
+  background-color: #1e1e1e;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #333;
 }
-
 
 .new-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 300px;
-  /* wider than other forms */
-  background: #f9f9f9;
+  background-color: #1e1e1e;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #333;
   border-radius: 10px;
   margin-top: 20px;
 }
@@ -142,52 +150,55 @@ form {
 .new-form label {
   font-weight: bold;
   margin-bottom: 4px;
+  color: #ffcc00;
 }
 
 .new-form input,
 .new-form select {
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   border-radius: 6px;
+  background-color: #2c2c2c;
+  color: #e0e0e0;
 }
 
 .new-form button {
-  background-color: #007bff;
-  /* blue button for add */
-  color: white;
+  background-color: #ffcc00;
+  /* yellow */
+  color: #121212;
   font-weight: bold;
 }
 
 .new-form button:hover {
-  background-color: #0056b3;
+  background-color: #e6b800;
 }
 
-
-
-
-
+/* Inputs (generic) */
 input,
 select {
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   border-radius: 6px;
+  background-color: #2c2c2c;
+  color: #e0e0e0;
 }
 
-
+/* Edit form (fixed to dark) */
 .edit-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 300px;
-  background: #f9f9f9;
+  background: #1e1e1e;
+  /* dark background */
+  color: #e0e0e0;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #333;
   border-radius: 10px;
   margin-bottom: 20px;
 }
 
-
-
+/* Buttons */
 button,
 .btn {
   display: inline-block;
@@ -195,68 +206,76 @@ button,
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  color: white;
   font-weight: bold;
   transition: background 0.2s;
 }
 
 /* Variants */
-.add-btn,
-.new-form button {
-  background-color: #28a745;
+.add-btn {
+  background-color: #ffcc00;
+  /* ✅ yellow */
   margin-top: 20px;
+  color: #121212;
+  /* black text */
+  font-weight: bold;
 }
 
-.add-btn:hover,
-.new-form button:hover {
-  background-color: #218838;
+.add-btn:hover {
+  background-color: #e6b800;
+  /* darker yellow on hover */
 }
 
 .save-btn {
-  background-color: #007bff;
+  background-color: #ffcc00;
+  color: #121212;
+  font-weight: bold;
 }
 
 .save-btn:hover {
-  background-color: #0056b3;
+  background-color: #e6b800;
 }
 
 .delete-btn {
   background-color: #dc3545;
+  color: white;
+  font-weight: bold;
 }
 
 .delete-btn:hover {
   background-color: #c82333;
 }
 
-.back-btn {
-  background-color: #6c757d;
-}
-
-.back-btn:hover {
-  background-color: #5a6268;
-}
-
-
+/* Sub-day nav */
 .day-nav {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin: 20px 0;
+  gap: 8px;
+  margin: 15px 0;
+  flex-wrap: wrap;
 }
 
 .day-nav .day-btn {
-  background-color: #007bff;
-  color: white;
+  background-color: #333;
+  color: #ffcc00;
   padding: 10px 16px;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
+  font-size: 14px;
+  /* smaller text */
+  flex: 0;
+  /* don’t stretch */
+  white-space: nowrap;
+  /* keep text in one line */
 }
 
 .day-nav .day-btn:hover {
-  background-color: #0056b3;
+  background-color: #ffcc00;
+  color: #121212;
 }
 
 .day-nav .day-btn.active {
-  background-color: #28a745; /* highlight active */
+  background-color: #ffcc00;
+  /* highlight */
+  color: #121212;
 }
