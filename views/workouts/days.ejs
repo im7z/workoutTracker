@@ -21,13 +21,18 @@
     </header>
 
     <!-- Sub-Day Navigation -->
+    <!-- Sub-Day Navigation -->
     <div class="day-nav">
-        <% for (let sd of subDays.sort()) { %>
-            <a href="/workouts/days/<%= day %>?subDay=<%= sd %>"
-                class="day-btn <%= currentSubDay == sd ? 'active' : '' %>">
-                Day <%= sd %>
-            </a>
-            <% } %>
+        <% if (subDays && subDays.length> 0) { %>
+            <% for (let sd of subDays.sort()) { %>
+                <a href="/workouts/days/<%= day %>?subDay=<%= sd %>"
+                    class="day-btn <%= currentSubDay == sd ? 'active' : '' %>">
+                    Day <%= sd %>
+                </a>
+                <% } %>
+                    <% } else { %>
+                        <p>No sub-days found for this workout day.</p>
+                        <% } %>
     </div>
 
     <% for (let workout of workouts) { %>
