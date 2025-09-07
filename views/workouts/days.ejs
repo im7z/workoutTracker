@@ -21,19 +21,20 @@
     </header>
 
     <!-- Sub-Day Navigation -->
-    <!-- Sub-Day Navigation -->
-    <div class="day-nav">
-        <% if (subDays && subDays.length> 0) { %>
-            <% for (let sd of subDays.sort()) { %>
-                <a href="/workouts/days/<%= day %>?subDay=<%= sd %>"
-                    class="day-btn <%= currentSubDay == sd ? 'active' : '' %>">
-                    Day <%= sd %>
-                </a>
-                <% } %>
-                    <% } else { %>
-                        <p>No sub-days found for this workout day.</p>
-                        <% } %>
-    </div>
+<div class="day-nav">
+  <% for (let sd of subDays.sort()) { %>
+    <% 
+      // if currentSubDay == sd, clicking again should remove filter
+      const link = (currentSubDay === sd) 
+        ? `/workouts/days/${day}` 
+        : `/workouts/days/${day}?subDay=${sd}`;
+    %>
+    <a href="<%= link %>"
+       class="day-btn <%= currentSubDay === sd ? 'active' : '' %>">
+       Day <%= sd %>
+    </a>
+  <% } %>
+</div>
 
     <% for (let workout of workouts) { %>
         <div class="workout-card">

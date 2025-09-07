@@ -116,13 +116,13 @@ app.get('/workouts/days/:day', async (req, res) => {
     const { subDay } = req.query;
 
     let filter = { day, userId: req.cookies.userId };
-    if (subDay) filter.subDay = subDay; // ✅ only show workouts for chosen subDay
+    if (subDay) filter.subDay = Number(subDay);
 
     const workouts = await Workouts.find(filter);
 
     const subDays = await Workouts.distinct("subDay", { day, userId: req.cookies.userId });
 
-    res.render("workouts/days", { workouts, day, subDays, currentSubDay: subDay });
+    res.render("workouts/days", { workouts, day, subDays, currentSubDay: subDay ? Number(subDay) : null });
 })
 
 app.get('/workouts/:id/show', async (req, res) => {

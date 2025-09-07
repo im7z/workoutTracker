@@ -239,11 +239,9 @@ button,
 
 .day-nav {
   display: flex;
-  gap: 10px;
-  margin: 20px 0;
-  flex-wrap: wrap;
-  /* ✅ wraps on small screens */
   justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
 }
 
 .day-nav .day-btn {
@@ -259,8 +257,6 @@ button,
   background-color: #0056b3;
 }
 
-
 .day-nav .day-btn.active {
-  background-color: #28a745;
-  /* ✅ highlight active sub-day */
+  background-color: #28a745; /* highlight active */
 }
