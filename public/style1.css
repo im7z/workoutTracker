@@ -235,3 +235,32 @@ button,
 .back-btn:hover {
   background-color: #5a6268;
 }
+
+
+.day-nav {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  /* ✅ wraps on small screens */
+  justify-content: center;
+}
+
+.day-nav .day-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.day-nav .day-btn:hover {
+  background-color: #0056b3;
+}
+
+
+.day-nav .day-btn.active {
+  background-color: #28a745;
+  /* ✅ highlight active sub-day */
+}

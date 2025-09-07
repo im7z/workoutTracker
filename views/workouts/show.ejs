@@ -27,6 +27,12 @@
         <button type="submit" class="save-btn"> Save Changes</button>
     </form>
 
+    <!-- Sub-Day -->
+    <label for="subDay">Workout Sub-Day</label>
+    <select name="subDay" id="subDay">
+        <option value="1" <%=workout.subDay==1 ? 'selected' : '' %>>Day 1</option>
+        <option value="2" <%=workout.subDay==2 ? 'selected' : '' %>>Day 2</option>
+    </select>
 
     <!-- Delete button -->
     <form action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">

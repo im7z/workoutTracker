@@ -19,14 +19,29 @@
             <%= day %> Workouts
         </h1>
     </header>
+
+    <!-- Sub-Day Navigation -->
+    <div class="day-nav">
+        <% for (let sd of subDays.sort()) { %>
+            <a href="/workouts/days/<%= day %>?subDay=<%= sd %>"
+                class="day-btn <%= currentSubDay == sd ? 'active' : '' %>">
+                Day <%= sd %>
+            </a>
+            <% } %>
+    </div>
+
     <% for (let workout of workouts) { %>
         <div class="workout-card">
             <img src="<%= workout.image %>" alt="<%= workout.name %>">
             <h2><a href="/workouts/<%= workout._id %>/show">
                     <%= workout.name %>
                 </a></h2>
-            <p>Weight: <b><%= workout.weight %></b> kg</p>
-            <p>Reps: <b><%= workout.reps %></b>
+            <p>Weight: <b>
+                    <%= workout.weight %>
+                </b> kg</p>
+            <p>Reps: <b>
+                    <%= workout.reps %>
+                </b>
             </p>
         </div>
         <% } %>

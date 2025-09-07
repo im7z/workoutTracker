@@ -18,21 +18,21 @@ cloudinary.config({
 
 // Configure Multer to use Cloudinary
 const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: 'workoutTracker',
-    format: 'jpg', // force to JPG (optional)
-    transformation: [
-      {
-        width: 400,
-        height: 300,
-        crop: "fill",
-        gravity: "auto",
-        quality: "auto",
-        fetch_format: "auto"
-      }
-    ]
-  }
+    cloudinary,
+    params: {
+        folder: 'workoutTracker',
+        format: 'jpg', // force to JPG (optional)
+        transformation: [
+            {
+                width: 400,
+                height: 300,
+                crop: "fill",
+                gravity: "auto",
+                quality: "auto",
+                fetch_format: "auto"
+            }
+        ]
+    }
 });
 
 const upload = multer({ storage });
@@ -92,7 +92,7 @@ app.get('/workouts/new', (req, res) => {
 });
 
 app.post('/workouts', upload.single('image'), async (req, res) => {
-    const { name, day, weight, reps } = req.body;
+    const { name, day, subDay, weight, reps } = req.body;
 
     // Cloudinary gives you a secure URL
     const imagePath = req.file.path;  // Cloudinary URL
@@ -100,6 +100,7 @@ app.post('/workouts', upload.single('image'), async (req, res) => {
     const newWorkout = new Workouts({
         name,
         day,
+        subDay,
         image: imagePath,   // store the Cloudinary URL
         weight,
         reps,
@@ -112,8 +113,16 @@ app.post('/workouts', upload.single('image'), async (req, res) => {
 
 app.get('/workouts/days/:day', async (req, res) => {
     const { day } = req.params;
-    const workouts = await Workouts.find({ day, userId: req.cookies.userId });
-    res.render("workouts/days", { workouts, day });
+    const { subDay } = req.query;
+
+    let filter = { day, userId: req.cookies.userId };
+    if (subDay) filter.subDay = subDay; // ✅ only show workouts for chosen subDay
+
+    const workouts = await Workouts.find(filter);
+
+    const subDays = await Workouts.distinct("subDay", { day, userId: req.cookies.userId });
+
+    es.render("workouts/days", { workouts, day, subDays, currentSubDay: subDay });
 })
 
 app.get('/workouts/:id/show', async (req, res) => {
@@ -126,7 +135,7 @@ app.put('/workouts/:id', async (req, res) => {
     const { id } = req.params;
     const workout = await Workouts.findByIdAndUpdate(
         id,
-        { weight: req.body.weight, reps: req.body.reps },
+        { weight: req.body.weight, reps: req.body.reps, subDay: req.body.subDay},
         { runValidators: true, new: true }
     );
     res.redirect(`/workouts/days/${workout.day}`);

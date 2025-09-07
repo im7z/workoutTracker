@@ -24,7 +24,13 @@ const workoutsSchema = new mongoose.Schema({
         required: true,
         min: 0
     },
-    userId: String
+    userId: {
+         type: String
+    },
+    subDay: {
+        type: Number,
+        default: 1
+    }
 });
 
 
