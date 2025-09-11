@@ -80,7 +80,7 @@ app.listen(3000, () => {
 })
 
 app.get('/', (req, res) => {
-    res.redirect('workouts/login');
+    res.redirect('/login');
 });
 app.get('/login', (req, res) => {
     res.render('workouts/login');
