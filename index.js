@@ -39,21 +39,21 @@ const upload = multer({ storage });
 
 
 const cookieParser = require('cookie-parser');
-const { v4: uuid } = require('uuid');  // for unique IDs
+// const { v4: uuid } = require('uuid');  // for unique IDs
 
 app.use(cookieParser());
 
-// Middleware to assign a userId if not exists
-app.use((req, res, next) => {
-    if (!req.cookies.userId) {
-        const newId = uuid();
-        res.cookie('userId', newId, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 });
-        // console.log("New user assigned:", newId);   // ✅ this works
-    } else {
-        // console.log("Returning user:", req.cookies.userId);
-    }
-    next();
-});
+// // Middleware to assign a userId if not exists
+// app.use((req, res, next) => {
+//     if (!req.cookies.userId) {
+//         const newId = uuid();
+//         res.cookie('userId', newId, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 });
+//         // console.log("New user assigned:", newId);   // ✅ this works
+//     } else {
+//         // console.log("Returning user:", req.cookies.userId);
+//     }
+//     next();
+// });
 
 const days = ['Push', 'Pull', 'Legs'];
 
@@ -80,6 +80,31 @@ app.listen(3000, () => {
 })
 
 app.get('/', (req, res) => {
+    res.redirect('/login');
+});
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+app.post('/login', async (req, res) => {
+    const { username } = req.body;
+
+    
+    const existingWorkout = await Workouts.findOne({ username });
+
+    if (existingWorkout) {
+        
+        res.cookie('userId', existingWorkout.userId, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 });
+    } else {
+        
+        const { v4: uuid } = require('uuid');
+        const newId = uuid();
+        res.cookie('userId', newId, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 });
+    }
+
+
+    res.cookie('username', username, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 });
+
     res.redirect('/workouts');
 });
 
@@ -104,7 +129,8 @@ app.post('/workouts', upload.single('image'), async (req, res) => {
         image: imagePath,   // store the Cloudinary URL
         weight,
         reps,
-        userId: req.cookies.userId
+        userId: req.cookies.userId,
+        username: req.cookies.username
     });
 
     await newWorkout.save();
