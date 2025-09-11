@@ -291,14 +291,23 @@ button,
 }
 
 
+/* Login Page (use same general style) */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;         
+}
+
 .login-container {
   background-color: #1e1e1e;
   padding: 25px;
   border-radius: 12px;
   border: 1px solid #333;
   text-align: center;
-  width: 90%;
-  max-width: 350px;
+  width: 80%;           
+  max-width: 300px;      
+  min-width: 280px;      
   box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
@@ -348,3 +357,4 @@ button,
 .login-form .btn:hover {
   background-color: #e6b800;
 }
+
