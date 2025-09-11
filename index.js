@@ -80,10 +80,10 @@ app.listen(3000, () => {
 })
 
 app.get('/', (req, res) => {
-    res.redirect('/login');
+    res.redirect('workouts/login');
 });
 app.get('/login', (req, res) => {
-    res.render('login');
+    res.render('workouts/login');
 });
 
 app.post('/login', async (req, res) => {
